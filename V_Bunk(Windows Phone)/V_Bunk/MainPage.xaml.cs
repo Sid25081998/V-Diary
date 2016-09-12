@@ -43,8 +43,6 @@ namespace V_Bunk
             
             this.InitializeComponent();
             constructor(); // Check for already data is available
-            passBox.Foreground = new SolidColorBrush(Windows.UI.Colors.Gray);
-            regBox.Foreground = new SolidColorBrush(Windows.UI.Colors.Gray);
             InputPane.GetForCurrentView().Showing += MainPage_Showing;
             InputPane.GetForCurrentView().Hiding += MainPage_Hiding;
             this.NavigationCacheMode = NavigationCacheMode.Required;
@@ -418,7 +416,6 @@ namespace V_Bunk
         {
             if (regBox.Text == "")
             {
-                regBox.Foreground = new SolidColorBrush(Windows.UI.Colors.Gray);
                 regBox.Text = "Registration No.";
             }
         }
@@ -428,7 +425,6 @@ namespace V_Bunk
             if(regBox.Text=="Registration No.")
             {
                 regBox.Text = "";
-                regBox.Foreground = new SolidColorBrush(Windows.UI.Colors.Black);
             }
             
         }
@@ -438,7 +434,6 @@ namespace V_Bunk
             if (passBox.Password == ".......")
             {
                 passBox.Password = "";
-                passBox.Foreground = new SolidColorBrush(Windows.UI.Colors.Black);
             }
         }
 
@@ -446,7 +441,6 @@ namespace V_Bunk
         {
             if (passBox.Password == "")
             {
-                passBox.Foreground = new SolidColorBrush(Windows.UI.Colors.Gray);
                 passBox.Password = ".......";
             }
         }
@@ -456,7 +450,6 @@ namespace V_Bunk
             if (captchaBox.Text == "Captcha")
             {
                 captchaBox.Text = "";
-                captchaBox.Foreground = new SolidColorBrush(Windows.UI.Colors.Black);
             }
         }
 
@@ -464,7 +457,6 @@ namespace V_Bunk
         {
             if (captchaBox.Text == "")
             {
-                captchaBox.Foreground = new SolidColorBrush(Windows.UI.Colors.Gray);
                 captchaBox.Text = "Captcha";
             }
         }
