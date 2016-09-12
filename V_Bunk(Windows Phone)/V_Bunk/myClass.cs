@@ -41,65 +41,60 @@ namespace V_Bunk
             return null;
         }
         //Save the data to phone............
-        public static async void sdtp()
+        public async static void sdtp()
         {
-
-            string timeTableString = JsonConvert.SerializeObject(timeTable) + " " + JsonConvert.SerializeObject(attCol);
-            byte[] timeTableByte = Encoding.UTF8.GetBytes(timeTableString.ToCharArray());
             
-            StorageFile subjectStorage = await ApplicationData.Current.LocalFolder.CreateFileAsync("subjectStorage", CreationCollisionOption.ReplaceExisting);
-            using (var stream = await subjectStorage.OpenStreamForWriteAsync())
-            {
-                stream.Write(timeTableByte, 0, timeTableByte.Length);
-            }
+                string timeTableString = JsonConvert.SerializeObject(timeTable) + " " + JsonConvert.SerializeObject(attCol);
+                byte[] timeTableByte = Encoding.UTF8.GetBytes(timeTableString.ToCharArray());
+
+                StorageFile subjectStorage = await ApplicationData.Current.LocalFolder.CreateFileAsync("subjectStorage", CreationCollisionOption.ReplaceExisting);
+                using (var stream = await subjectStorage.OpenStreamForWriteAsync())
+                {
+                    stream.Write(timeTableByte, 0, timeTableByte.Length);
+                }
+         
         }
 
-        public async static void createNotification()
+        public static void createNotification()
         {
-            DateTime now = new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day);
-            try {
-                for (int i = 0; i < 5; i++)
-                {
-                    switch (now.DayOfWeek.ToString())
+                DateTime now = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+                    for (int i = 0; i < 5; i++)
                     {
-                        case "Monday":
-                            foreach (var subject in timeTable[0])
-                            {
-                                setToast(subject.title, subject.time, subject.room, time(subject.time.Substring(0, 7), now));
-                            }
-                            break;
-                        case "Tuesday":
-                            foreach (var subject in timeTable[1])
-                            {
-                                setToast(subject.title, subject.time, subject.room, time(subject.time.Substring(0, 7), now));
-                            }
-                            break;
-                        case "Wednesday":
-                            foreach (var subject in timeTable[2])
-                            {
-                                setToast(subject.title, subject.time, subject.room, time(subject.time.Substring(0, 7), now));
-                            }
-                            break;
-                        case "Thursday":
-                            foreach (var subject in timeTable[3])
-                            {
-                                setToast(subject.title, subject.time, subject.room, time(subject.time.Substring(0, 7), now));
-                            }
-                            break;
-                        case "Friday":
-                            foreach (var subject in timeTable[4])
-                            {
-                                setToast(subject.title, subject.time, subject.room, time(subject.time.Substring(0, 7), now));
-                            }
-                            break;
+                        switch (now.DayOfWeek.ToString())
+                        {
+                            case "Monday":
+                                foreach (var subject in timeTable[0])
+                                {
+                                    setToast(subject.title, subject.time, subject.room, time(subject.time.Substring(0, 7), now));
+                                }
+                                break;
+                            case "Tuesday":
+                                foreach (var subject in timeTable[1])
+                                {
+                                    setToast(subject.title, subject.time, subject.room, time(subject.time.Substring(0, 7), now));
+                                }
+                                break;
+                            case "Wednesday":
+                                foreach (var subject in timeTable[2])
+                                {
+                                    setToast(subject.title, subject.time, subject.room, time(subject.time.Substring(0, 7), now));
+                                }
+                                break;
+                            case "Thursday":
+                                foreach (var subject in timeTable[3])
+                                {
+                                    setToast(subject.title, subject.time, subject.room, time(subject.time.Substring(0, 7), now));
+                                }
+                                break;
+                            case "Friday":
+                                foreach (var subject in timeTable[4])
+                                {
+                                    setToast(subject.title, subject.time, subject.room, time(subject.time.Substring(0, 7), now));
+                                }
+                                break;
+                        }
+                        now = now.AddDays(1);
                     }
-                    now = now.AddDays(1);
-                }
-            }
-            catch (Exception e)
-            {
-               await new MessageDialog(e.ToString()).ShowAsync();
-            }
         }
 
         //Toast designer

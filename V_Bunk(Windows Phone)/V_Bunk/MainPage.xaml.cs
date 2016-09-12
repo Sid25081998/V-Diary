@@ -20,6 +20,7 @@ using Newtonsoft.Json;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Notifications;
 using Windows.UI.ViewManagement;
+using System.Threading.Tasks;
 
 
 
@@ -386,8 +387,11 @@ namespace V_Bunk
                     }
                 }
                 //await new MessageDialog(JsonConvert.SerializeObject(myClass.timeTable)).ShowAsync();
-                myClass.sdtp();
-                myClass.createNotification();
+                Task.Run(() =>
+                {
+                    myClass.sdtp();
+                    myClass.createNotification();
+                });
                 Frame.Navigate(typeof(Att));
             }
             catch(Exception x)

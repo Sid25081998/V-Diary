@@ -10,7 +10,7 @@
     <Page.BottomAppBar>
         <CommandBar>
             <AppBarButton x:ConnectionId='1' Icon="Pin" Label="Pin"                           />
-            <AppBarButton Icon="Back" Label="Go Back"/>
+            <AppBarButton x:ConnectionId='2' Icon="Back" Label="Go Back"                             />
         </CommandBar>
     </Page.BottomAppBar>
     <Grid x:Name="LayoutRoot">
@@ -41,7 +41,7 @@
             <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="10,237,0,0" TextWrapping="Wrap" Text="Deadline" VerticalAlignment="Top" FontSize="20"/>
             <DatePicker x:Name="deadDate" HorizontalAlignment="Left" Margin="10,254,0,0" VerticalAlignment="Top" Width="155"/>
             <TimePicker x:Name="deadTime" HorizontalAlignment="Left" Margin="197,254,0,0" VerticalAlignment="Top" Width="155"/>
-            <ToggleSwitch x:ConnectionId='2' x:Name="pokeSwitch" Header="Poke Me" HorizontalAlignment="Right" Margin="0,308,0,0" VerticalAlignment="Top" Width="352"                             />
+            <ToggleSwitch x:ConnectionId='3' x:Name="pokeSwitch" Header="Poke Me" HorizontalAlignment="Right" Margin="0,308,0,0" VerticalAlignment="Top" Width="352"                             />
             <Grid Margin="0,368,0,0" x:Name="pokeGrid">
                 <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" Text="Poke Me" VerticalAlignment="Top" FontSize="20"/>
                 <DatePicker x:Name="pokeDate" HorizontalAlignment="Left" Margin="10,17,0,0" VerticalAlignment="Top" Width="155"/>
