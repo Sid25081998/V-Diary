@@ -100,7 +100,7 @@
     </Page.Background>
 
     <Page.BottomAppBar>
-        <CommandBar Name="mainBar" Background="Transparent">
+        <CommandBar Name="mainBar" Background="#FF0B2D3B">
             <AppBarButton Name="signin"  Icon="Accept" Label="Sign In" Click="signin_Click"/>
         </CommandBar>
     </Page.BottomAppBar>
@@ -223,7 +223,7 @@
                     </PasswordBox>
                 </Border>
                 <Image x:Name="captcha" HorizontalAlignment="Left" Height="37" Margin="40,305,0,0" VerticalAlignment="Top" Width="128" Stretch="Fill"/>
-                <TextBox x:Name="captchaBox" HorizontalAlignment="Left" Margin="177,305,0,0" TextWrapping="Wrap" Text="Captcha" VerticalAlignment="Top" Width="188" Height="37" FontSize="26.667" InputScope="Default" BorderThickness="0,0,0,2" GotFocus="captchaBox_GotFocus" LostFocus="captchaBox_LostFocus" Style="{StaticResource transparentTextBox}" Background="{x:Null}" BorderBrush="Black"/>
+                <TextBox x:Name="captchaBox" HorizontalAlignment="Left" Margin="177,305,0,0" TextWrapping="Wrap" Text="Captcha" VerticalAlignment="Top" Width="174" Height="37" FontSize="26.667" InputScope="Default" BorderThickness="0,0,0,2" GotFocus="captchaBox_GotFocus" LostFocus="captchaBox_LostFocus" Style="{StaticResource transparentTextBox}" Background="{x:Null}" BorderBrush="Black"/>
             </Grid>
 
             <!--Loading Image grid-->

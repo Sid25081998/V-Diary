@@ -16,26 +16,99 @@
         </CommandBar>
     </Page.BottomAppBar>
 
-    <Grid>
-        <Pivot x:Name="vDash" Title="V Diary" FontFamily="Assets/Fonts/Selima .otf#Selima" SelectionChanged="Pivot_SelectionChanged">
-            <PivotItem Header="My Subjects   " Margin="0,0,0,0">
+    <Grid Margin="0,-27,0,0">
+        <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="142" Background="#FF009D97"/>
+        <Pivot x:Name="vDash" Title="V Diary" FontFamily="Assets/Fonts/Selima .otf#Selima" SelectionChanged="Pivot_SelectionChanged" Margin="0,26,0,0">
+            <Pivot.Resources>
+                <Thickness x:Key="PivotPortraitThemePadding">19,38,0,0</Thickness>
+                <Thickness x:Key="PivotLandscapeThemePadding">19,25,0,0</Thickness>
+                <Style x:Key="MyPivotStyle" TargetType="Pivot">
+                    <Setter Property="Margin" Value="0"/>
+                    <Setter Property="Padding" Value="0"/>
+                    <Setter Property="Foreground" Value="{ThemeResource PhoneForegroundBrush}"/>
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="ItemsPanel">
+                        <Setter.Value>
+                            <ItemsPanelTemplate>
+                                <Grid/>
+                            </ItemsPanelTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Pivot">
+                                <Grid x:Name="RootElement" Background="{TemplateBinding Background}" HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" MinHeight="87"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup x:Name="Orientation">
+                                            <VisualState x:Name="Portrait">
+                                                <Storyboard>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" Storyboard.TargetName="TitleContentControl">
+                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource PivotPortraitThemePadding}"/>
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="Landscape">
+                                                <Storyboard>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" Storyboard.TargetName="TitleContentControl">
+                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource PivotLandscapeThemePadding}"/>
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
+                                    <ContentControl x:Name="TitleContentControl" ContentTemplate="{TemplateBinding TitleTemplate}" Content="V Diary" Style="{StaticResource PivotTitleContentControlStyle}" FontSize="35" VerticalAlignment="Top" Foreground="White" FontFamily="Assets/Fonts/VTKSMural.ttf#VTKS  mural" Margin="18,38,0,0"/>
+                                    <ScrollViewer x:Name="ScrollViewer" HorizontalSnapPointsAlignment="Center" HorizontalSnapPointsType="MandatorySingle" HorizontalScrollBarVisibility="Hidden" Margin="{TemplateBinding Padding}" Grid.Row="1" Template="{StaticResource ScrollViewerScrollBarlessTemplate}" VerticalSnapPointsType="None" VerticalScrollBarVisibility="Disabled" VerticalScrollMode="Disabled" VerticalContentAlignment="Stretch" ZoomMode="Disabled">
+                                        <PivotPanel x:Name="Panel" VerticalAlignment="Top">
+                                            <PivotHeaderPanel x:Name="Header" VerticalAlignment="Top" Height="64">
+                                                <PivotHeaderPanel.RenderTransform>
+                                                    <CompositeTransform x:Name="HeaderTranslateTransform" TranslateX="0"/>
+                                                </PivotHeaderPanel.RenderTransform>
+                                            </PivotHeaderPanel>
+                                            <ItemsPresenter x:Name="PivotItemPresenter">
+                                                <ItemsPresenter.RenderTransform>
+                                                    <TranslateTransform x:Name="ItemsPresenterTranslateTransform" X="0"/>
+                                                </ItemsPresenter.RenderTransform>
+                                            </ItemsPresenter>
+                                        </PivotPanel>
+                                    </ScrollViewer>
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Pivot.Resources>
+            <Pivot.Style>
+                <StaticResource ResourceKey="MyPivotStyle"/>
+            </Pivot.Style>
+            <PivotItem Margin="0,0,0,0">
+                <PivotItem.Header>
+                    <TextBlock Text="My Subjects  " FontSize="45" Foreground="White"/>
+                </PivotItem.Header>
                 <Grid>
-                    <ListView x:Name="Attendance" HorizontalAlignment="Left" Height="487" VerticalAlignment="Top" Width="400" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="0,0,0,-41">
+                    <ListView x:Name="Attendance" Margin="0,0,0,0" HorizontalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <Grid HorizontalAlignment="Left" Height="97" Margin="0,0,0,5" VerticalAlignment="Top" Width="390" Background="#FF0D0D0D">
-                                    <TextBlock x:Name="code" HorizontalAlignment="Left" Margin="225,69,0,-3" TextWrapping="Wrap" Text="{Binding code}" VerticalAlignment="Top" Height="31" Width="101" FontSize="20" Style="{StaticResource ListViewEmptyStaticTextBlockStyle}"/>
-                                    <TextBlock x:Name="title" HorizontalAlignment="Left" Margin="20,0,0,0" TextWrapping="Wrap" Text="{Binding title}" VerticalAlignment="Top" Height="69" Width="360" FontSize="24" Style="{StaticResource SubheaderTextBlockStyle}"/>
-                                    <TextBlock x:Name="teacher" HorizontalAlignment="Left" Margin="20,69,0,-3" TextWrapping="Wrap" Text="{Binding teacher}" VerticalAlignment="Top" Height="31" Width="215" FontSize="20" Style="{StaticResource ListViewEmptyStaticTextBlockStyle}"/>
-                                    <TextBlock x:Name="att" HorizontalAlignment="Left" Margin="331,69,0,0" TextWrapping="Wrap" Text="{Binding attString}" VerticalAlignment="Top" Height="28" Width="49" FontSize="17.333" Style="{StaticResource ListViewEmptyStaticTextBlockStyle}"/>
-                                    <Grid HorizontalAlignment="Left" Height="97" Margin="0,5,0,5" VerticalAlignment="Top" Width="7" Background="{Binding myColor}"/>
-                                </Grid>
+                                <StackPanel HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top">
+                                    <TextBlock x:Name="title" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" Text="{Binding title}" VerticalAlignment="Top" FontSize="22" Style="{StaticResource SubheaderTextBlockStyle}" Width="400"/>
+                                    <Grid Margin="0,0,0,0">
+                                        <TextBlock x:Name="code" HorizontalAlignment="Left" Margin="225,0,0,-3" TextWrapping="Wrap" Text="{Binding code}" VerticalAlignment="Top" FontSize="20" Style="{StaticResource ListViewEmptyStaticTextBlockStyle}"/>
+                                        <TextBlock x:Name="teacher" HorizontalAlignment="Left" Margin="20,0,0,-3" TextWrapping="Wrap" Text="{Binding teacher}" VerticalAlignment="Top" Height="31" Width="215" FontSize="20" Style="{StaticResource ListViewEmptyStaticTextBlockStyle}"/>
+                                        <TextBlock x:Name="att" HorizontalAlignment="Left" Margin="230,0,0,0" TextWrapping="Wrap" Text="{Binding attString}" VerticalAlignment="Top" Height="28" Width="49" FontSize="17.333" Style="{StaticResource ListViewEmptyStaticTextBlockStyle}"/>
+                                    </Grid>
+                                </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
                 </Grid>
             </PivotItem>
-            <PivotItem Header="To-Do      " Margin="0,0,0,0">
+            <PivotItem  Margin="0,0,0,0">
+                <PivotItem.Header>
+                    <TextBlock Text="To-Do   " FontSize="50" Foreground="White"/>
+                </PivotItem.Header>
                 <ListView x:Name="taskList">
                     <ListView.ItemTemplate>
                         <DataTemplate>

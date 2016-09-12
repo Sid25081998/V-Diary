@@ -85,7 +85,6 @@ namespace V_Bunk
                     MessageDialog box = new MessageDialog(msg);
                     await box.ShowAsync();
                 }
-                captchaBox.Foreground = new SolidColorBrush(Windows.UI.Colors.Gray);
                 captchaBox.Text = "Captcha";
             }
         }
@@ -361,6 +360,7 @@ namespace V_Bunk
                 {
              
                     myClass.attCol[i-1].att = Convert.ToInt32(await myClass.web.InvokeScriptAsync("eval", new string[] { "document.getElementsByTagName('table')[4].rows[" + i.ToString() + "].cells[8].innerText" }));
+                    myClass.attCol[i - 1].attString = myClass.attCol[i - 1].att.ToString() + "%";
                     myClass.attCol[i-1].ctd = Convert.ToInt32(await myClass.web.InvokeScriptAsync("eval", new string[] { "document.getElementsByTagName('table')[4].rows[" + i.ToString() + "].cells[7].innerText" }));
                 }
                 foreach (var i in myClass.timeTable)
