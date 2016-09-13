@@ -86,18 +86,18 @@
             </Pivot.Style>
             <PivotItem Margin="0,0,0,0">
                 <PivotItem.Header>
-                    <TextBlock Text="My Subjects  " FontSize="45" Foreground="White"/>
+                    <TextBlock Text="Subjects  " FontSize="45" Foreground="White"/>
                 </PivotItem.Header>
-                <Grid>
+                <Grid Margin="0,0,0,0">
                     <ListView x:Name="Attendance" Margin="0,0,0,0" HorizontalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top">
-                                    <TextBlock x:Name="title" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" Text="{Binding title}" VerticalAlignment="Top" FontSize="22" Style="{StaticResource SubheaderTextBlockStyle}" Width="400"/>
+                                <StackPanel HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Top">
+                                    <TextBlock x:Name="title" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding title}" VerticalAlignment="Top" FontSize="22" Style="{StaticResource HeaderTextBlockStyle}"/>
+                                    <TextBlock x:Name="teacher" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding teacher}" VerticalAlignment="Top" FontSize="20" Style="{StaticResource SubheaderTextBlockStyle}"/>
                                     <Grid Margin="0,0,0,0">
-                                        <TextBlock x:Name="code" HorizontalAlignment="Left" Margin="225,0,0,-3" TextWrapping="Wrap" Text="{Binding code}" VerticalAlignment="Top" FontSize="20" Style="{StaticResource ListViewEmptyStaticTextBlockStyle}"/>
-                                        <TextBlock x:Name="teacher" HorizontalAlignment="Left" Margin="20,0,0,-3" TextWrapping="Wrap" Text="{Binding teacher}" VerticalAlignment="Top" Height="31" Width="215" FontSize="20" Style="{StaticResource ListViewEmptyStaticTextBlockStyle}"/>
-                                        <TextBlock x:Name="att" HorizontalAlignment="Left" Margin="230,0,0,0" TextWrapping="Wrap" Text="{Binding attString}" VerticalAlignment="Top" Height="28" Width="49" FontSize="17.333" Style="{StaticResource ListViewEmptyStaticTextBlockStyle}"/>
+                                        <TextBlock x:Name="code" HorizontalAlignment="Left" Margin="0,0,0,-3" TextWrapping="Wrap" Text="{Binding code}" VerticalAlignment="Top" FontSize="20" Style="{StaticResource ListViewEmptyStaticTextBlockStyle}"/>
+                                        <TextBlock x:Name="att" HorizontalAlignment="Left" Margin="150,0,0,0" TextWrapping="Wrap" Text="{Binding attString}" VerticalAlignment="Top" Height="28" Width="49" FontSize="17.333" Style="{StaticResource ListViewEmptyStaticTextBlockStyle}"/>
                                     </Grid>
                                 </StackPanel>
                             </DataTemplate>

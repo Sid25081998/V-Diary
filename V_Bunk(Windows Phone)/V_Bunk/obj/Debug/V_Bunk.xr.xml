@@ -5,8 +5,8 @@
     <RootPropertyPathName Name="deadline" />
     <RootPropertyPathName Name="title" />
     <RootPropertyPathName Name="attString" />
-    <RootPropertyPathName Name="teacher" />
     <RootPropertyPathName Name="code" />
+    <RootPropertyPathName Name="teacher" />
     <RootPropertyPathName Name="att" />
     <RootPropertyPathName Name="type" />
     <RootPropertyPathName Name="time" />

@@ -38,11 +38,6 @@ namespace V_Bunk
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
-            monDay.ItemsSource = myClass.timeTable[0];
-            tueDay.ItemsSource = myClass.timeTable[1];
-            wedDay.ItemsSource = myClass.timeTable[2];
-            thursDay.ItemsSource = myClass.timeTable[3];
-            friDay.ItemsSource = myClass.timeTable[4];
             String day = DateTime.Now.DayOfWeek.ToString();
             switch (day){
                 case "Monday":
@@ -125,6 +120,11 @@ namespace V_Bunk
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             this.navigationHelper.OnNavigatedTo(e);
+            monDay.ItemsSource = myClass.timeTable[0];
+            tueDay.ItemsSource = myClass.timeTable[1];
+            wedDay.ItemsSource = myClass.timeTable[2];
+            thursDay.ItemsSource = myClass.timeTable[3];
+            friDay.ItemsSource = myClass.timeTable[4];
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)

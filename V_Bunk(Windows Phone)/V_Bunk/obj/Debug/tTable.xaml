@@ -14,161 +14,63 @@
         </CommandBar>
     </Page.BottomAppBar>
 
-
-    <Grid x:Name="LayoutRoot" Margin="0,-26,0,0">
-
-        <Grid.ChildrenTransitions>
-            <TransitionCollection>
-                <EntranceThemeTransition/>
-            </TransitionCollection>
-        </Grid.ChildrenTransitions>
-
-
-        <Pivot Title="Time Table" Name="timeTable" Margin="0,26,0,0" >
-            <PivotItem Margin="0,0,0,0">
+    <Page.Resources>
+        <DataTemplate x:Key="listTemplate">
+            <Grid x:ConnectionId='3' HorizontalAlignment="Left" Margin="0,5,0,5" VerticalAlignment="Top" Width="400"                     >
+                <FlyoutBase.AttachedFlyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Text="{Binding code}" Margin="-19,0,-0.167,0"  />
+                        <MenuFlyoutItem Text="{Binding teacher}" Margin="-19,0,-0.167,0" />
+                        <MenuFlyoutItem Text="{Binding att}" Margin="-19,0,-0.167,0"/>
+                    </MenuFlyout>
+                </FlyoutBase.AttachedFlyout>
+                <Grid HorizontalAlignment="Left" Margin="0,2,0,2" Width="7" Background="#FF007ACC" />
+                <StackPanel>
+                    <TextBlock x:Name="title" HorizontalAlignment="Left" Margin="20,0,0,0" TextWrapping="Wrap" Text="{Binding title}" VerticalAlignment="Top" Width="380" FontSize="23" Style="{StaticResource SubheaderTextBlockStyle}"/>
+                    <Grid>
+                        <TextBlock x:Name="room" HorizontalAlignment="Left" Margin="270,0,0,0" TextWrapping="Wrap" Text="{Binding room}" VerticalAlignment="Top" Width="81" FontSize="17.333" Style="{StaticResource ListViewEmptyStaticTextBlockStyle}"/>
+                        <TextBlock x:Name="time" HorizontalAlignment="Left" Margin="90,0,0,0" TextWrapping="Wrap" Text="{Binding time}" VerticalAlignment="Top" Width="150" FontSize="17.333" Style="{StaticResource ListViewEmptyStaticTextBlockStyle}"/>
+                        <TextBlock x:Name="type" HorizontalAlignment="Left" Margin="20,0,0,0" TextWrapping="Wrap" Text="{Binding type}" VerticalAlignment="Top" Width="74" FontSize="17.333" Style="{StaticResource ListViewEmptyStaticTextBlockStyle}"/>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+    <Grid x:Name="LayoutRoot" Margin="0,-27,0,0">
+        <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="142" Background="#FFEB7260"/>
+        <Pivot Name="timeTable" Margin="0,27,0,0" >
+            <Pivot.Title>
+                <TextBlock Text="Time Table" Foreground="White"/>
+            </Pivot.Title>
+            <PivotItem Margin="0,0,0,0" >
                 <PivotItem.Header>
-                    <TextBlock Text="Monday" FontSize="40"/>
+                    <TextBlock Text="Monday  " Foreground="White"/>
                 </PivotItem.Header>
-                <ListView x:Name="monDay" HorizontalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Hidden">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid x:ConnectionId='7' HorizontalAlignment="Left" Margin="0,5,0,5" VerticalAlignment="Top" Width="400"                     >
-                                <FlyoutBase.AttachedFlyout>
-                                    <MenuFlyout>
-                                        <MenuFlyoutItem Text="{Binding code}" Margin="-19,0,-0.167,0"  />
-                                        <MenuFlyoutItem Text="{Binding teacher}" Margin="-19,0,-0.167,0" />
-                                        <MenuFlyoutItem Text="{Binding att}" Margin="-19,0,-0.167,0"/>
-                                    </MenuFlyout>
-                                </FlyoutBase.AttachedFlyout>
-                                <Grid HorizontalAlignment="Left" Margin="0,2,0,2" Width="7" Background="#FF007ACC" />
-                                <StackPanel>
-                                    <TextBlock x:Name="title" HorizontalAlignment="Left" Margin="20,0,0,0" TextWrapping="Wrap" Text="{Binding title}" VerticalAlignment="Top" Width="380" FontSize="23" Style="{StaticResource SubheaderTextBlockStyle}"/>
-                                    <Grid>
-                                        <TextBlock x:Name="room" HorizontalAlignment="Left" Margin="270,0,0,0" TextWrapping="Wrap" Text="{Binding room}" VerticalAlignment="Top" Width="81" FontSize="17.333" Style="{StaticResource ListViewEmptyStaticTextBlockStyle}"/>
-                                        <TextBlock x:Name="time" HorizontalAlignment="Left" Margin="90,0,0,0" TextWrapping="Wrap" Text="{Binding time}" VerticalAlignment="Top" Width="150" FontSize="17.333" Style="{StaticResource ListViewEmptyStaticTextBlockStyle}"/>
-                                        <TextBlock x:Name="type" HorizontalAlignment="Left" Margin="20,0,0,0" TextWrapping="Wrap" Text="{Binding type}" VerticalAlignment="Top" Width="74" FontSize="17.333" Style="{StaticResource ListViewEmptyStaticTextBlockStyle}"/>
-                                    </Grid>
-                                </StackPanel>
-                            </Grid>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                <ListView x:Name="monDay" HorizontalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemTemplate="{StaticResource listTemplate}" />
             </PivotItem>
             <PivotItem Margin="0,0,0,0">
                 <PivotItem.Header>
-                    <TextBlock Text="Tuesday" FontSize="40"/>
+                    <TextBlock Text="Tuesday  " Foreground="White"/>
                 </PivotItem.Header>
-                <ListView x:Name="tueDay" HorizontalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Hidden" RenderTransformOrigin="0.5,0.5">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid x:ConnectionId='6' HorizontalAlignment="Left" Margin="0,5,0,5" VerticalAlignment="Top" Width="400"                     >
-                                <FlyoutBase.AttachedFlyout>
-                                    <MenuFlyout>
-                                        <MenuFlyoutItem Text="{Binding code}" Margin="-19,0,-0.167,0"  />
-                                        <MenuFlyoutItem Text="{Binding teacher}" Margin="-19,0,-0.167,0" />
-                                        <MenuFlyoutItem Text="{Binding att}" Margin="-19,0,-0.167,0"/>
-                                    </MenuFlyout>
-                                </FlyoutBase.AttachedFlyout>
-                                <Grid HorizontalAlignment="Left" Margin="0,2,0,2" Width="7" Background="#FF007ACC" />
-                                <StackPanel>
-                                    <TextBlock x:Name="title" HorizontalAlignment="Left" Margin="20,0,0,0" TextWrapping="Wrap" Text="{Binding title}" VerticalAlignment="Top" Width="380" FontSize="23" Style="{StaticResource SubheaderTextBlockStyle}"/>
-                                    <Grid>
-                                        <TextBlock x:Name="room" HorizontalAlignment="Left" Margin="270,0,0,0" TextWrapping="Wrap" Text="{Binding room}" VerticalAlignment="Top" Width="81" FontSize="17.333" Style="{StaticResource ListViewEmptyStaticTextBlockStyle}"/>
-                                        <TextBlock x:Name="time" HorizontalAlignment="Left" Margin="90,0,0,0" TextWrapping="Wrap" Text="{Binding time}" VerticalAlignment="Top" Width="150" FontSize="17.333" Style="{StaticResource ListViewEmptyStaticTextBlockStyle}"/>
-                                        <TextBlock x:Name="type" HorizontalAlignment="Left" Margin="20,0,0,0" TextWrapping="Wrap" Text="{Binding type}" VerticalAlignment="Top" Width="74" FontSize="17.333" Style="{StaticResource ListViewEmptyStaticTextBlockStyle}"/>
-                                    </Grid>
-                                </StackPanel>
-                            </Grid>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                <ListView x:Name="tueDay" HorizontalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Hidden" RenderTransformOrigin="0.5,0.5" ItemTemplate="{StaticResource listTemplate}"/>
+            </PivotItem>
+            <PivotItem Margin="0,0,0,0" >
+                <PivotItem.Header>
+                    <TextBlock Text="Wednsday" Foreground="White"/>
+                </PivotItem.Header>
+                <ListView x:Name="wedDay" HorizontalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemTemplate="{StaticResource listTemplate}"/>
             </PivotItem>
             <PivotItem Margin="0,0,0,0">
                 <PivotItem.Header>
-                    <TextBlock Text="Wednsday" FontSize="40"/>
+                    <TextBlock Text="Thursday    " Foreground="White"/>
                 </PivotItem.Header>
-                <ListView x:Name="wedDay" HorizontalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Hidden">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid x:ConnectionId='5' HorizontalAlignment="Left" Margin="0,5,0,5" VerticalAlignment="Top" Width="400"                     >
-                                <FlyoutBase.AttachedFlyout>
-                                    <MenuFlyout>
-                                        <MenuFlyoutItem Text="{Binding code}" Margin="-19,0,-0.167,0"  />
-                                        <MenuFlyoutItem Text="{Binding teacher}" Margin="-19,0,-0.167,0" />
-                                        <MenuFlyoutItem Text="{Binding att}" Margin="-19,0,-0.167,0"/>
-                                    </MenuFlyout>
-                                </FlyoutBase.AttachedFlyout>
-                                <Grid HorizontalAlignment="Left" Margin="0,2,0,2" Width="7" Background="#FF007ACC" />
-                                <StackPanel>
-                                    <TextBlock x:Name="title" HorizontalAlignment="Left" Margin="20,0,0,0" TextWrapping="Wrap" Text="{Binding title}" VerticalAlignment="Top" Width="380" FontSize="23" Style="{StaticResource SubheaderTextBlockStyle}"/>
-                                    <Grid>
-                                        <TextBlock x:Name="room" HorizontalAlignment="Left" Margin="270,0,0,0" TextWrapping="Wrap" Text="{Binding room}" VerticalAlignment="Top" Width="81" FontSize="17.333" Style="{StaticResource ListViewEmptyStaticTextBlockStyle}"/>
-                                        <TextBlock x:Name="time" HorizontalAlignment="Left" Margin="90,0,0,0" TextWrapping="Wrap" Text="{Binding time}" VerticalAlignment="Top" Width="150" FontSize="17.333" Style="{StaticResource ListViewEmptyStaticTextBlockStyle}"/>
-                                        <TextBlock x:Name="type" HorizontalAlignment="Left" Margin="20,0,0,0" TextWrapping="Wrap" Text="{Binding type}" VerticalAlignment="Top" Width="74" FontSize="17.333" Style="{StaticResource ListViewEmptyStaticTextBlockStyle}"/>
-                                    </Grid>
-                                </StackPanel>
-                            </Grid>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </PivotItem>
-            <PivotItem Margin="0,0,0,0"  >
-                <PivotItem.Header>
-                    <TextBlock Text="Thrusday" FontSize="40"/>
-                </PivotItem.Header>
-                <ListView x:Name="thursDay" HorizontalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Hidden">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid x:ConnectionId='4' HorizontalAlignment="Left" Margin="0,5,0,5" VerticalAlignment="Top" Width="400"                     >
-                                <FlyoutBase.AttachedFlyout>
-                                    <MenuFlyout>
-                                        <MenuFlyoutItem Text="{Binding code}" Margin="-19,0,-0.167,0"  />
-                                        <MenuFlyoutItem Text="{Binding teacher}" Margin="-19,0,-0.167,0" />
-                                        <MenuFlyoutItem Text="{Binding att}" Margin="-19,0,-0.167,0"/>
-                                    </MenuFlyout>
-                                </FlyoutBase.AttachedFlyout>
-                                <Grid HorizontalAlignment="Left" Margin="0,2,0,2" Width="7" Background="#FF007ACC" />
-                                <StackPanel>
-                                    <TextBlock x:Name="title" HorizontalAlignment="Left" Margin="20,0,0,0" TextWrapping="Wrap" Text="{Binding title}" VerticalAlignment="Top" Width="380" FontSize="23" Style="{StaticResource SubheaderTextBlockStyle}"/>
-                                    <Grid>
-                                        <TextBlock x:Name="room" HorizontalAlignment="Left" Margin="270,0,0,0" TextWrapping="Wrap" Text="{Binding room}" VerticalAlignment="Top" Width="81" FontSize="17.333" Style="{StaticResource ListViewEmptyStaticTextBlockStyle}"/>
-                                        <TextBlock x:Name="time" HorizontalAlignment="Left" Margin="90,0,0,0" TextWrapping="Wrap" Text="{Binding time}" VerticalAlignment="Top" Width="150" FontSize="17.333" Style="{StaticResource ListViewEmptyStaticTextBlockStyle}"/>
-                                        <TextBlock x:Name="type" HorizontalAlignment="Left" Margin="20,0,0,0" TextWrapping="Wrap" Text="{Binding type}" VerticalAlignment="Top" Width="74" FontSize="17.333" Style="{StaticResource ListViewEmptyStaticTextBlockStyle}"/>
-                                    </Grid>
-                                </StackPanel>
-                            </Grid>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                <ListView x:Name="thursDay" HorizontalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemTemplate="{StaticResource listTemplate}"/>
             </PivotItem>
             <PivotItem Margin="0,0,0,0">
                 <PivotItem.Header>
-                    <TextBlock Text="Friday" FontSize="40"/>
+                    <TextBlock Text="Friday     " Foreground="White"/>
                 </PivotItem.Header>
-                <ListView x:Name="friDay" HorizontalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Hidden">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid x:ConnectionId='3' HorizontalAlignment="Left" Margin="0,5,0,5" VerticalAlignment="Top" Width="400"                     >
-                                <FlyoutBase.AttachedFlyout>
-                                    <MenuFlyout>
-                                        <MenuFlyoutItem Text="{Binding code}" Margin="-19,0,-0.167,0"  />
-                                        <MenuFlyoutItem Text="{Binding teacher}" Margin="-19,0,-0.167,0" />
-                                        <MenuFlyoutItem Text="{Binding att}" Margin="-19,0,-0.167,0"/>
-                                    </MenuFlyout>
-                                </FlyoutBase.AttachedFlyout>
-                                <Grid HorizontalAlignment="Left" Margin="0,2,0,2" Width="7" Background="#FF007ACC" />
-                                <StackPanel>
-                                    <TextBlock x:Name="title" HorizontalAlignment="Left" Margin="20,0,0,0" TextWrapping="Wrap" Text="{Binding title}" VerticalAlignment="Top" Width="380" FontSize="23" Style="{StaticResource SubheaderTextBlockStyle}"/>
-                                    <Grid>
-                                        <TextBlock x:Name="room" HorizontalAlignment="Left" Margin="270,0,0,0" TextWrapping="Wrap" Text="{Binding room}" VerticalAlignment="Top" Width="81" FontSize="17.333" Style="{StaticResource ListViewEmptyStaticTextBlockStyle}"/>
-                                        <TextBlock x:Name="time" HorizontalAlignment="Left" Margin="90,0,0,0" TextWrapping="Wrap" Text="{Binding time}" VerticalAlignment="Top" Width="150" FontSize="17.333" Style="{StaticResource ListViewEmptyStaticTextBlockStyle}"/>
-                                        <TextBlock x:Name="type" HorizontalAlignment="Left" Margin="20,0,0,0" TextWrapping="Wrap" Text="{Binding type}" VerticalAlignment="Top" Width="74" FontSize="17.333" Style="{StaticResource ListViewEmptyStaticTextBlockStyle}"/>
-                                    </Grid>
-                                </StackPanel>
-                            </Grid>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                <ListView x:Name="friDay" HorizontalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemTemplate="{StaticResource listTemplate}"/>
             </PivotItem>
         </Pivot>
         <StackPanel  x:Name="tapAgain" Background="#FF007ACC" Visibility="Collapsed" Height="25" VerticalAlignment="Bottom">
