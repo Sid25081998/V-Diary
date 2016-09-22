@@ -7,10 +7,12 @@
     <RootPropertyPathName Name="attString" />
     <RootPropertyPathName Name="code" />
     <RootPropertyPathName Name="teacher" />
-    <RootPropertyPathName Name="att" />
+    <RootPropertyPathName Name="etime" />
+    <RootPropertyPathName Name="stime" />
+    <RootPropertyPathName Name="titleMargin" />
+    <RootPropertyPathName Name="titleOpacity" />
+    <RootPropertyPathName Name="gridVisibility" />
     <RootPropertyPathName Name="type" />
-    <RootPropertyPathName Name="time" />
-    <RootPropertyPathName Name="room" />
   </Roots.PropertyPathNames>
   <Roots.RootTypes>
     <RootType FullName="Windows.UI.Xaml.Application">
@@ -48,7 +50,7 @@
       <RootProperty Name="Height" />
       <RootProperty Name="Width" />
       <RootProperty Name="Visibility" />
-      <RootEvent Name="Tapped" />
+      <RootProperty Name="MinHeight" />
       <RootMethod Name="GetRow" />
       <RootMethod Name="SetRow" />
     </RootType>
@@ -100,6 +102,7 @@
       <RootProperty Name="FontFamily" />
       <RootProperty Name="Width" />
       <RootProperty Name="TextAlignment" />
+      <RootProperty Name="Opacity" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.DatePicker">
       <RootProperty Name="HorizontalAlignment" />
@@ -265,7 +268,8 @@
       <RootProperty Name="ItemTemplate" />
       <RootProperty Name="Margin" />
       <RootProperty Name="HorizontalAlignment" />
-      <RootProperty Name="RenderTransformOrigin" />
+      <RootProperty Name="IsItemClickEnabled" />
+      <RootEvent Name="ItemClick" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.DataTemplate">
       <RootProperty Name="Template" />
@@ -292,6 +296,8 @@
       <RootProperty Name="Height" />
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Child" />
+      <RootProperty Name="Opacity" />
+      <RootProperty Name="Visibility" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ContentPresenter">
       <RootProperty Name="ContentTemplate" />
@@ -348,16 +354,13 @@
       <RootProperty Name="VerticalAlignment" />
     </RootType>
     <RootType FullName="V_Bunk.MainPage" />
-    <RootType FullName="Windows.UI.Xaml.Controls.Primitives.FlyoutBase">
-      <RootMethod Name="GetAttachedFlyout" />
-      <RootMethod Name="SetAttachedFlyout" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.MenuFlyout">
-      <RootProperty Name="Items" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.MenuFlyoutItem">
-      <RootProperty Name="Text" />
+    <RootType FullName="Windows.UI.Xaml.Shapes.Rectangle">
+      <RootProperty Name="Fill" />
       <RootProperty Name="Margin" />
+      <RootProperty Name="Stroke" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="StrokeThickness" />
+      <RootProperty Name="Opacity" />
     </RootType>
     <RootType FullName="V_Bunk.tTable" />
   </Roots.RootTypes>

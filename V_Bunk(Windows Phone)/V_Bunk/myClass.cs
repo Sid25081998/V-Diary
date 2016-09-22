@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Controls;
 using System.Threading.Tasks;
 using Windows.UI;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml;
 
 
 namespace V_Bunk
@@ -20,7 +21,7 @@ namespace V_Bunk
     {
         public static WebView web = new WebView();
         public static ObservableCollection<Subject> attCol = new ObservableCollection<Subject>();
-        public static ObservableCollection<ObservableCollection<Subject>> timeTable = new ObservableCollection<ObservableCollection<Subject>>();
+        public static ObservableCollection<ObservableCollection<timeTableCell>> timeTable = new ObservableCollection<ObservableCollection<timeTableCell>>();
         public static ToastNotifier toastNotifier = ToastNotificationManager.CreateToastNotifier();
         public static string semStart;
         public static string cat1;
@@ -57,44 +58,44 @@ namespace V_Bunk
 
         public static void createNotification()
         {
-                DateTime now = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
-                    for (int i = 0; i < 5; i++)
-                    {
-                        switch (now.DayOfWeek.ToString())
+             DateTime now = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            for (int i = 0; i < 5; i++)
+            {
+                switch (now.DayOfWeek.ToString())
+                {
+                    case "Monday":
+                        foreach (var subject in timeTable[0])
                         {
-                            case "Monday":
-                                foreach (var subject in timeTable[0])
-                                {
-                                    setToast(subject.title, subject.time, subject.room, time(subject.time.Substring(0, 7), now));
-                                }
-                                break;
-                            case "Tuesday":
-                                foreach (var subject in timeTable[1])
-                                {
-                                    setToast(subject.title, subject.time, subject.room, time(subject.time.Substring(0, 7), now));
-                                }
-                                break;
-                            case "Wednesday":
-                                foreach (var subject in timeTable[2])
-                                {
-                                    setToast(subject.title, subject.time, subject.room, time(subject.time.Substring(0, 7), now));
-                                }
-                                break;
-                            case "Thursday":
-                                foreach (var subject in timeTable[3])
-                                {
-                                    setToast(subject.title, subject.time, subject.room, time(subject.time.Substring(0, 7), now));
-                                }
-                                break;
-                            case "Friday":
-                                foreach (var subject in timeTable[4])
-                                {
-                                    setToast(subject.title, subject.time, subject.room, time(subject.time.Substring(0, 7), now));
-                                }
-                                break;
+                            if (subject.code != null) setToast(subject.title, subject.stime, subject.room, time(subject.stime.Substring(0, 7), now));
                         }
-                        now = now.AddDays(1);
-                    }
+                        break;
+                    case "Tuesday":
+                        foreach (var subject in timeTable[1])
+                        {
+                            if (subject.code != null) setToast(subject.title, subject.stime, subject.room, time(subject.stime.Substring(0, 7), now));
+                        }
+                        break;
+                    case "Wednesday":
+                        foreach (var subject in timeTable[2])
+                        {
+                            if (subject.code != null)  setToast(subject.title, subject.stime, subject.room, time(subject.stime.Substring(0, 7), now));
+                        }
+                        break;
+                    case "Thursday":
+                        foreach (var subject in timeTable[3])
+                        {
+                            if (subject.code != null)  setToast(subject.title, subject.stime, subject.room, time(subject.stime.Substring(0, 7), now));
+                        }
+                        break;
+                    case "Friday":
+                        foreach (var subject in timeTable[4])
+                        {
+                            if (subject.code != null)  setToast(subject.title, subject.stime, subject.room, time(subject.stime.Substring(0, 7), now));
+                        }
+                        break;
+                }
+                now = now.AddDays(1);
+            }
         }
 
         //Toast designer
@@ -119,12 +120,13 @@ namespace V_Bunk
                 //Skip the subject
             }
         }
+
         private static DateTime time(string hour, DateTime now)
         {
                 int h = Convert.ToInt32(hour.Substring(0, 2));
 
                 string meridian = hour.Substring(5, 2);
-                if (meridian == "PM")
+                if (meridian == "PM" && h!=12)
                 {
                     h = (12 + h);
                 }
@@ -135,7 +137,9 @@ namespace V_Bunk
                     m = 60 + m;
                     h = h - 1;
                 }
+
                 return new DateTime(now.Year, now.Month, now.Day, h, m, 0);
+            
         }
         
     }
@@ -144,22 +148,42 @@ namespace V_Bunk
         public string code { get; set; }
         public string title { get; set; }
         public string teacher { get; set; }
-        public int att { get; set; }
         public string attString { get; set; }
         public string room { get; set; }
         public int ctd { get; set; }
-        public string time { get; set; }
         public string type { get; set; }
-        public SolidColorBrush myColor { get; set; }
         //Constructor
         public Subject()
         {
             code = null;
             title = null;
             teacher = null;
+            ctd = 0;
+        }
+    }
+    public class timeTableCell
+    {
+        public string code { get; set; }
+        public string title { get; set; }
+        public string teacher { get; set; }
+        public string attString { get; set; }
+        public string room { get; set; }
+        public int ctd { get; set; }
+        public string stime { get; set; }
+        public string etime { get; set; }
+        public string type { get; set; }
+        //Rendering variables in the listview
+        public Visibility gridVisibility { get; set; }
+        public double titleOpacity { get; set; }
+        public Thickness titleMargin { get; set; }
+        //Constructor
+        public timeTableCell()
+        {
+            code = null;
+            title = null;
+            teacher = null;
             room = null;
             ctd = 0;
-            att = 0;
         }
     }
 

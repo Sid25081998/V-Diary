@@ -121,7 +121,7 @@ namespace V_Bunk
         {
             this.navigationHelper.OnNavigatedTo(e);
             monDay.ItemsSource = myClass.timeTable[0];
-            tueDay.ItemsSource = myClass.timeTable[1];
+            tuesDay.ItemsSource = myClass.timeTable[1];
             wedDay.ItemsSource = myClass.timeTable[2];
             thursDay.ItemsSource = myClass.timeTable[3];
             friDay.ItemsSource = myClass.timeTable[4];
@@ -138,13 +138,6 @@ namespace V_Bunk
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(Att));
-        }
-
-        private void Grid_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            FrameworkElement senderElement = sender as FrameworkElement;
-            FlyoutBase flyoutBase = FlyoutBase.GetAttachedFlyout(senderElement);
-            flyoutBase.ShowAt(senderElement);
         }
 
         private async void refresh_Click(object sender, RoutedEventArgs e)
@@ -165,6 +158,42 @@ namespace V_Bunk
             tapAgain.Visibility = Visibility.Visible;
             await Task.Delay(3000);
             tapAgain.Visibility = Visibility.Collapsed;
+        }
+
+        private async void itemClicked(timeTableCell sub)
+        {
+            if (sub.code != null)
+            {
+                await new MessageDialog(sub.code).ShowAsync();
+            }
+        }
+        private void monDay_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            timeTableCell clicked = e.ClickedItem as timeTableCell;
+            itemClicked(clicked);
+        }
+        private void tuesDay_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            timeTableCell clicked = e.ClickedItem as timeTableCell;
+            itemClicked(clicked);
+        }
+
+        private void wedDay_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            timeTableCell clicked = e.ClickedItem as timeTableCell;
+            itemClicked(clicked);
+        }
+
+        private void thursDay_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            timeTableCell clicked = e.ClickedItem as timeTableCell;
+            itemClicked(clicked);
+        }
+
+        private void friDay_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            timeTableCell clicked = e.ClickedItem as timeTableCell;
+            itemClicked(clicked);
         }
     }
 }

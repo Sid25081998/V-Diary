@@ -56,7 +56,6 @@ namespace V_Bunk
         private void MainPage_Showing(InputPane sender, InputPaneVisibilityEventArgs args)
         {
             scrlViewer.Height = this.ActualHeight - args.OccludedRect.Height - 50;
-
         }
 
         private async void Web_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
@@ -88,6 +87,7 @@ namespace V_Bunk
                 captchaBox.Text = "Captcha";
             }
         }
+        
         //get the time table from the page;
         private void Web_getSchedule(object sender, NavigationEventArgs e)
         {
@@ -189,7 +189,7 @@ namespace V_Bunk
                     text = reader.ReadToEnd();
                 }
                 string[] Jsons = text.Split(' ');
-                myClass.timeTable = JsonConvert.DeserializeObject<ObservableCollection<ObservableCollection<Subject>>>(Jsons[0]);
+                myClass.timeTable = JsonConvert.DeserializeObject<ObservableCollection<ObservableCollection<timeTableCell>>>(Jsons[0]);
                 myClass.attCol = JsonConvert.DeserializeObject<ObservableCollection<Subject>>(Jsons[1]);
                 stream.Dispose();
                 var schedules = myClass.toastNotifier.GetScheduledToastNotifications();
@@ -198,10 +198,6 @@ namespace V_Bunk
                     myClass.toastNotifier.RemoveFromSchedule(i);
                 }
                 myClass.createNotification();
-                /*foreach(var i in myClass.attCol)
-                {
-                    i.myColor = new SolidColorBrush(myClass.avlblColrs[myClass.attCol.IndexOf(i)]);
-                }*/
                 Frame.Navigate(typeof(Att));
             }
             catch
@@ -209,6 +205,7 @@ namespace V_Bunk
                 //Do Nothing.................
             }
         }
+
         private async void getFromtable1()
         {
             //delete the first two coloumns as it makes it complicated
@@ -260,78 +257,96 @@ namespace V_Bunk
             getFromtable2();
             
         }
+
         private async void getFromtable2()
         {
-            
-            await myClass.web.InvokeScriptAsync("eval", new string[] { "document.getElementsByTagName('table')[2].rows[0].deleteCell(7)" });
-            for (int row = 2; row <= 6; row++)
-            {
-                //traverse a new day and get the new day subjects
-                
-                ObservableCollection<Subject> today = new ObservableCollection<Subject>();
-                string colstring = await myClass.web.InvokeScriptAsync("eval", new string[] { "document.getElementsByTagName('table')[2].rows['" + row + "'].cells.length.toString()" });
-                
-                int col = Convert.ToInt32(colstring);
-                int extraTime=0;
-                for (int cell = 1; cell <= col-1; cell++)
+            try {
+                await myClass.web.InvokeScriptAsync("eval", new string[] { "document.getElementsByTagName('table')[2].rows[0].deleteCell(7)" });
+                for (int row = 2; row <= 6; row++)
                 {
-                    string cellColor = await myClass.web.InvokeScriptAsync("eval", new string[] { "document.getElementsByTagName('table')[2].rows['" + row + "'].cells['" + cell + "'].bgColor" });
-                    int  colspan = Convert.ToInt32(await myClass.web.InvokeScriptAsync("eval", new string[] { "document.getElementsByTagName('table')[2].rows['" + row + "'].cells['" + cell + "'].colSpan.toString()" }));
-                    if (colspan > 1)
-                    {
-                        extraTime = colspan-1;
-                    }
+                    //traverse a new day and get the new day subjects
 
-                    
-                    //check if not a free slot
-                    if (cellColor== "#ccff33")
+                    ObservableCollection<timeTableCell> today = new ObservableCollection<timeTableCell>();
+                    string colstring = await myClass.web.InvokeScriptAsync("eval", new string[] { "document.getElementsByTagName('table')[2].rows['" + row + "'].cells.length.toString()" });
+
+                    int col = Convert.ToInt32(colstring);
+                    int extraTime = 0;
+                    for (int cell = 1; cell <= col - 1; cell++)
                     {
-                        //get the text
-                        
-                        string text = await myClass.web.InvokeScriptAsync("eval", new string[] { "document.getElementsByTagName('table')[2].rows['" + row + "'].cells['" + cell + "'].innerText.toString()" });
-                        try
+                        string cellColor = await myClass.web.InvokeScriptAsync("eval", new string[] { "document.getElementsByTagName('table')[2].rows['" + row + "'].cells['" + cell + "'].bgColor" });
+                        int colspan = Convert.ToInt32(await myClass.web.InvokeScriptAsync("eval", new string[] { "document.getElementsByTagName('table')[2].rows['" + row + "'].cells['" + cell + "'].colSpan.toString()" }));
+                        if (colspan > 1)
                         {
-                            Subject newSubject = new Subject();
-                            string rawType = text.Split('-')[1];
-                            string type = rawType.Substring(1, rawType.Length - 2);
-                            newSubject.code = text.Substring(0, 7);
-                            newSubject.type = type;
-                            if (type == "ETH" || type == "SS" || type == "TH")
+                            extraTime = colspan - 1;
+                        }
+
+                        timeTableCell newSubject = new timeTableCell();
+                        string text = await myClass.web.InvokeScriptAsync("eval", new string[] { "document.getElementsByTagName('table')[2].rows['" + row + "'].cells['" + cell + "'].innerText.toString()" });
+                        //check if not a free slot
+                        if (cellColor == "#ccff33")
+                        {
+                            //get the text
+                            try
+                            {
+                                string rawType = text.Split('-')[1];
+                                string type = rawType.Substring(1, rawType.Length - 2);
+                                newSubject.code = text.Substring(0, 7);
+                                newSubject.type = type;
+                                if (type == "ETH" || type == "SS" || type == "TH")
                                 {
-                                string time = await myClass.web.InvokeScriptAsync("eval", new string[] { "document.getElementsByTagName('table')[2].rows[0].cells['" + (cell+extraTime) + "'].innerText.toString()" });
-                                newSubject.time = time.Substring(0, 7) + " - " + time.Substring(13, 7);
+                                    string time = await myClass.web.InvokeScriptAsync("eval", new string[] { "document.getElementsByTagName('table')[2].rows[0].cells['" + (cell + extraTime) + "'].innerText.toString()" });
+                                    newSubject.stime = time.Substring(0, 7);
+                                    newSubject.etime = time.Substring(13, 7);
                                 }
-                           else
+                                else
                                 {
-                                    string sTime = await myClass.web.InvokeScriptAsync("eval", new string[] { "document.getElementsByTagName('table')[2].rows[1].cells['" + (cell+extraTime) + "'].innerText.toString()" });
-                                    string etime = await myClass.web.InvokeScriptAsync("eval", new string[] { "document.getElementsByTagName('table')[2].rows[1].cells['" + (cell + 1+extraTime) + "'].innerText.toString()" });
-                                    newSubject.time = sTime.Substring(0, 7) + " - " + etime.Substring(13, 7);
+                                    string stime = await myClass.web.InvokeScriptAsync("eval", new string[] { "document.getElementsByTagName('table')[2].rows[1].cells['" + (cell + extraTime) + "'].innerText.toString()" });
+                                    string etime = await myClass.web.InvokeScriptAsync("eval", new string[] { "document.getElementsByTagName('table')[2].rows[1].cells['" + (cell + extraTime+1) + "'].innerText.toString()" });
+                                    newSubject.stime = stime.Substring(0, 7);
+                                    newSubject.etime = etime.Substring(13, 7);
                                     cell++;
                                 }
-                            
-                            today.Add(newSubject);
+                                newSubject.titleOpacity = 1.0;
+                                newSubject.titleMargin = new Thickness(30, 0, 100, 0);
                             }
-                        catch(Exception e)
-                        {
-                            MessageDialog m = new MessageDialog(e.ToString());
-                            await m.ShowAsync();
+                            catch (Exception e)
+                            {
+                                MessageDialog m = new MessageDialog(e.ToString());
+                                await m.ShowAsync();
+                            }
+
                         }
+                        else
+                        {
+                            
+                            string time= await myClass.web.InvokeScriptAsync("eval", new string[] { "document.getElementsByTagName('table')[2].rows[1].cells['" + (cell + extraTime) + "'].innerText.toString()" });
+                            newSubject.stime = time.Substring(0, 7);
+                            newSubject.etime= time.Substring(13, 7);
+                            newSubject.title = text;
+                            newSubject.titleOpacity = 0.3;
+                            newSubject.titleMargin = new Thickness(5, 0, 0, 0);
+                        }
+                        today.Add(newSubject);
                     }
-                }
 
-                try
-                {
-                    myClass.timeTable.Add(today);
-                }
-                catch(Exception e)
-                {
-                    await new MessageDialog(e.ToString()).ShowAsync();
-                }
+                    try
+                    {
+                        myClass.timeTable.Add(today);
+                    }
+                    catch (Exception e)
+                    {
+                        await new MessageDialog(e.ToString()).ShowAsync();
+                    }
 
+                }
+                myClass.web.LoadCompleted -= Web_getSchedule;
+                myClass.web.LoadCompleted += Web_getAttendance;
+                myClass.web.Navigate(new Uri("https://academicscc.vit.ac.in/student/attn_report.asp?sem=FS"));
             }
-            myClass.web.LoadCompleted -= Web_getSchedule;
-            myClass.web.LoadCompleted += Web_getAttendance;
-            myClass.web.Navigate(new Uri("https://academicscc.vit.ac.in/student/attn_report.asp?sem=FS"));
+            catch(Exception e)
+            {
+                await new MessageDialog(e.ToString()).ShowAsync();
+            }
         }
 
         private async void getAttendance()
@@ -352,35 +367,41 @@ namespace V_Bunk
             }
             
         }
+
         private async void Web_getAttendanceInf(object sender, NavigationEventArgs e)
         {
             try
             {
                 for (int i = 1; i <= myClass.attCol.Count; i++)
                 {
-             
-                    myClass.attCol[i-1].att = Convert.ToInt32(await myClass.web.InvokeScriptAsync("eval", new string[] { "document.getElementsByTagName('table')[4].rows[" + i.ToString() + "].cells[8].innerText" }));
-                    myClass.attCol[i - 1].attString = myClass.attCol[i - 1].att.ToString() + "%";
+                    myClass.attCol[i - 1].attString = (await myClass.web.InvokeScriptAsync("eval", new string[] { "document.getElementsByTagName('table')[4].rows[" + i.ToString() + "].cells[8].innerText" })) + "%";
                     myClass.attCol[i-1].ctd = Convert.ToInt32(await myClass.web.InvokeScriptAsync("eval", new string[] { "document.getElementsByTagName('table')[4].rows[" + i.ToString() + "].cells[7].innerText" }));
                 }
                 foreach (var i in myClass.timeTable)
                 {
                     foreach (var j in i)
                     {
-                        var sub = myClass.searchByCode(j.code, j.type);
-                        try
+                        if (j.code != null)
                         {
-                            j.title = sub.title;
-                            j.room = sub.room;
-                            j.teacher = sub.teacher;
-                            j.att = sub.att;
-                            j.ctd = sub.ctd;
-                            j.attString = j.att.ToString() + "%";
+                            var sub = myClass.searchByCode(j.code, j.type);
+                            try
+                            {
+                                j.title = sub.title;
+                                j.room = sub.room;
+                                j.teacher = sub.teacher;
+                                j.ctd = sub.ctd;
+                                j.attString = sub.attString;
+                                j.gridVisibility = Visibility.Visible;
+                            }
+                            catch
+                            {
+                                MessageDialog c = new MessageDialog(j.code);
+                                await c.ShowAsync();
+                            }
                         }
-                        catch
+                        else
                         {
-                            MessageDialog c = new MessageDialog(j.code);
-                            await c.ShowAsync();
+                            j.gridVisibility = Visibility.Collapsed;
                         }
                     }
                 }
