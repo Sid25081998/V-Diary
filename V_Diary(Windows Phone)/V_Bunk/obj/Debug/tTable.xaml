@@ -1,0 +1,98 @@
+﻿<Page
+    x:Class="V_Bunk.tTable"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:V_Bunk"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RequestedTheme="Light">
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton x:ConnectionId='1' Icon="Clock" Label="Attendance"                           />
+            <AppBarButton x:ConnectionId='2' Icon="Refresh" Label="Refresh"                      />
+        </CommandBar>
+    </Page.BottomAppBar>
+
+    <Page.Resources>
+        <!--Datatemplate for the timetable-->
+            <DataTemplate x:Key="listTemplate">
+            <Border BorderThickness="0,0.5" BorderBrush="#FF787878" Opacity="1">
+                <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Width="400" MinHeight="50">
+                    <Border HorizontalAlignment="Left" Margin="0,3,0,3" Background="#FF007ACC" Width="25" Visibility="{Binding gridVisibility}">
+                        <TextBlock Text="{Binding type}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14" Foreground="White"/>
+                    </Border>
+                    <StackPanel Margin="{Binding titleMargin}">
+                        <TextBlock x:Name="title" TextWrapping="Wrap" Text="{Binding title}" VerticalAlignment="Center" FontSize="18" Opacity="{Binding titleOpacity}" Style="{StaticResource SubheaderTextBlockStyle}"/>
+                    </StackPanel>
+                    <Border Background="White" HorizontalAlignment="Right" VerticalAlignment="Top" BorderBrush="#FFB4B4B4" BorderThickness="1" CornerRadius="5" Width="53">
+                        <TextBlock TextWrapping="Wrap" Text="{Binding stime}" FontSize="13" VerticalAlignment="Top" HorizontalAlignment="Center" Style="{StaticResource ListViewEmptyStaticTextBlockStyle}"/>
+                    </Border>
+                    <Border Background="White" HorizontalAlignment="Right"  VerticalAlignment="Bottom" BorderBrush="#FFB4B4B4" BorderThickness="1" CornerRadius="5" Width="53">
+                        <TextBlock TextWrapping="Wrap" Text="{Binding etime}" FontSize="13" VerticalAlignment="Bottom" HorizontalAlignment="Center" Style="{StaticResource ListViewEmptyStaticTextBlockStyle}"/>
+                    </Border>
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </Page.Resources>
+    <Grid x:Name="LayoutRoot" Margin="0,-27,0,0">
+        <Grid x:Name="rest">
+            <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="142" Background="#FFEB7260"/>
+            <Pivot Name="timeTable" Margin="0,27,0,0" >
+                <Pivot.Title>
+                    <TextBlock Text="Time Table" Foreground="White"/>
+                </Pivot.Title>
+                <PivotItem Margin="0,0,0,0" >
+                    <PivotItem.Header>
+                        <TextBlock Text="Monday  " Foreground="White"/>
+                    </PivotItem.Header>
+                    <Grid Margin="0,3,0,0">
+                        <Rectangle Fill="#FFF4F4F5" Stroke="Black" Width="1" StrokeThickness="0.5" Opacity="0.3" Margin="371,0,28,0"/>
+                        <ListView x:ConnectionId='7' x:Name="monDay" HorizontalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemTemplate="{StaticResource listTemplate}" IsItemClickEnabled="True"                              />
+                    </Grid>
+                </PivotItem>
+                <PivotItem Margin="0,0,0,0">
+                    <PivotItem.Header>
+                        <TextBlock Text="Tuesday  " Foreground="White"/>
+                    </PivotItem.Header>
+                    <Grid Margin="0,3,0,0">
+                        <Rectangle Fill="#FFF4F4F5"  Margin="369,0,30,0" Stroke="Black" Width="1" StrokeThickness="0.5" Opacity="0.3" />
+                        <ListView x:ConnectionId='6' x:Name="tuesDay" HorizontalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemTemplate="{StaticResource listTemplate}" IsItemClickEnabled="True"                              />
+                    </Grid>
+                </PivotItem>
+                <PivotItem Margin="0,0,0,0" >
+                    <PivotItem.Header>
+                        <TextBlock Text="Wednsday" Foreground="White"/>
+                    </PivotItem.Header>
+                    <Grid Margin="0,3,0,0">
+                        <Rectangle Fill="#FFF4F4F5"  Margin="369,0,30,0" Stroke="Black" Width="1" StrokeThickness="0.5" Opacity="0.3"/>
+                        <ListView x:ConnectionId='5' x:Name="wedDay" HorizontalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemTemplate="{StaticResource listTemplate}" IsItemClickEnabled="True"                             />
+                    </Grid>
+                </PivotItem>
+                <PivotItem Margin="0,0,0,0">
+                    <PivotItem.Header>
+                        <TextBlock Text="Thursday    " Foreground="White"/>
+                    </PivotItem.Header>
+                    <Grid Margin="0,3,0,0">
+                        <Rectangle Fill="#FFF4F4F5"  Margin="369,0,30,0" Stroke="Black" Width="1" StrokeThickness="0.5" Opacity="0.3"/>
+                        <ListView x:ConnectionId='4' x:Name="thursDay" HorizontalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemTemplate="{StaticResource listTemplate}" IsItemClickEnabled="True"                               />
+                    </Grid>
+                </PivotItem>
+                <PivotItem Margin="0,0,0,0">
+                    <PivotItem.Header>
+                        <TextBlock Text="Friday     " Foreground="White"/>
+                    </PivotItem.Header>
+                    <Grid Margin="0,3,0,0">
+                        <Rectangle Fill="#FFF4F4F5"  Margin="369,0,30,0" Stroke="Black" Width="1" StrokeThickness="0.5" Opacity="0.3"/>
+                        <ListView x:ConnectionId='3' x:Name="friDay" HorizontalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemTemplate="{StaticResource listTemplate}"                              IsItemClickEnabled="True"/>
+                    </Grid>
+                </PivotItem>
+            </Pivot>
+        </Grid>
+        <StackPanel  x:Name="tapAgain" Background="#FF007ACC" Visibility="Collapsed" VerticalAlignment="Bottom">
+            <TextBlock  Text="Tap Again to refresh" FontSize="23" Foreground="Black" VerticalAlignment="Center"/>
+        </StackPanel>
+        <!--TODO: Content should be placed within the following grid-->
+    </Grid>
+</Page>
+

@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">V Diary UX</string>
+    <string name="title_activity_schedule">Time Table</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_dash">V Diary</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+</resources>

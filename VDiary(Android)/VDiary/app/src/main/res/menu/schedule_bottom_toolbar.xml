@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.sridh.vdiary.schedule">
+    <item
+        android:id="@+id/action_SwitchToDash"
+        android:orderInCategory="200"
+        android:title="Search"
+        android:icon="@drawable/dual_1_left"
+        app:showAsAction="always"
+        ></item>
+
+</menu>

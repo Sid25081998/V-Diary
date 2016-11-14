@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="0dp"
+    android:background="#ffffff">
+
+    <TextView
+        android:text="ELA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/subType"
+        android:height="40dp"
+        android:width="25dp"
+        android:textAlignment="center"
+        android:gravity="center_vertical"
+        android:background="@color/windows_color"
+        android:textColor="@android:color/white"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:textSize="12sp" />
+
+    <TextView
+        android:text="Title"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/subType"
+        android:id="@+id/subName"
+        android:textSize="17sp"
+        android:textColor="@android:color/black"
+        android:gravity="center_vertical"/>
+
+    <TextView
+        android:text="att"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/subAtt"
+        android:textSize="17sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/subTeacher"
+        android:layout_marginLeft="5dp"
+        android:background="#ffffff"
+        android:textColor="#939292"
+        android:text="NACHIYAPPAN .S"
+        android:layout_below="@+id/subName"
+        android:layout_toRightOf="@id/subType"
+        android:textSize="15dp" />
+
+</RelativeLayout>
